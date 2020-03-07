@@ -9,15 +9,15 @@ import java.net.URL;
 
 public class Main {
 
-    public final String APIKey = "A5ETHRCZN7N9TV4K";
-    private final String baseURL = "https://www.alphavantage.co/query?function=%&symbol=%&interval=%min&apikey=%";
+    static final String APIkey = "A5ETHRCZN7N9TV4K";
+    static final String baseURL = "https://www.alphavantage.co/query?function=%&symbol=%&interval=%min&apikey=%";
+    static final String function = "TIME_SERIES_INTRADAY";
+    static final int interval = 5;
+    static final String appleSymbol = "AAPL";
 
     public static void main(String[] args) {
 
-        String APIkey = "A5ETHRCZN7N9TV4K";
-        String baseURL = "https://www.alphavantage.co/query?function=%&symbol=%&interval=%min&apikey=%";
-
-        String urlString = buildUrl(baseURL, "TIME_SERIES_INTRADAY","AAPL", 5, APIkey);
+        String urlString = buildUrl(baseURL, function,appleSymbol, interval, APIkey);
         try {
             String response = sendGETRequest(urlString);
             System.out.println(response);
@@ -43,7 +43,6 @@ public class Main {
         URL url = new URL(urlString);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
-//        int responseCode = connection.getResponseCode();
         BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         StringBuffer content = new StringBuffer();
         String inputLine;
