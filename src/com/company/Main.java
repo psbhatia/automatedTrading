@@ -2,6 +2,7 @@ package com.company;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Main {
@@ -14,8 +15,15 @@ public class Main {
         String APIkey = "A5ETHRCZN7N9TV4K";
         String baseURL = "https://www.alphavantage.co/query?function=%&symbol=%&interval=%min&apikey=%";
 
-        String url = buildUrl(baseURL, "TestFunction","testSymbol", 5, APIkey);
-        System.out.println(url);
+        String urlString = buildUrl(baseURL, "TestFunction","testSymbol", 5, APIkey);
+        try {
+            int responseCode = sendGETRequest(urlString);
+            System.out.println(responseCode);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     /*
@@ -25,4 +33,15 @@ public class Main {
         String url = baseURL.replaceFirst("%", function).replaceFirst("%",symbol).replaceFirst("%",String.valueOf(interval)).replaceFirst("%",APIKey);
         return url;
     }
+
+    /*
+    Make a get request to the provided URL
+     */
+    private static int sendGETRequest(String urlString) throws IOException {
+        URL url = new URL(urlString);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
+        return connection.getResponseCode();
+    }
+
 }
