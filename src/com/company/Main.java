@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 
 public class Main {
 
@@ -22,8 +23,13 @@ public class Main {
     static final int interval = 5;
     static final String appleSymbol = "AAPL";
 
+
     public static void main(String[] args) {
 
+        HashMap<String, Double> portfolio = new HashMap<String, Double>();
+        portfolio.put(appleSymbol,5.0);
+        portfolio.put("TSLA",9.0);
+        double wallet = 1000.00;
         String urlString = buildUrl(baseURL, function,appleSymbol, interval, APIkey);
         try {
             String response = sendGETRequest(urlString);
@@ -74,5 +80,7 @@ public class Main {
 
         return Double.parseDouble(latestPrice);
     }
+
+
 
 }
