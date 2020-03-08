@@ -29,6 +29,7 @@ public class Main {
             String response = sendGETRequest(urlString);
             double latestPrice = getLatestStockPrice(response);
             System.out.print(latestPrice);
+            System.out.println("Test");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -59,6 +60,7 @@ public class Main {
         in.close();
 
         return content.toString();
+
     }
 
     /*
